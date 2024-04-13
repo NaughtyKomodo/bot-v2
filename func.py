@@ -49,8 +49,8 @@ def get_date(year=None, month=None, day=None, now=now, as_str=True):
 
     dt_month = dict(
         zip(range(1, 13), [
-            'janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho',
-            'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
+            'Agustus', 'September', 'Oktober', 'November', 'Desember'
         ]))
 
     if as_str == True:
@@ -143,7 +143,7 @@ def create_grid(year=None, month=None, full_grid=False):
                 content_xpath = '/html/body/section/div/div/table/tbody/tr[{0}]/td[{1}]/ul/li[{2}]/a'.format(
                 a, b, c)
                 content = html_tree.xpath(content_xpath)[0].text_content()
-                feriado_str = 'feriado!⭐ '
+                feriado_str = 'liburan!⭐ '
                 content = feriado_str+content
             except:
                 content = None           
@@ -212,7 +212,7 @@ def get_list_feriado_futuro(year = None, now = now):
     list_feriados_futuro = [x for x in list_distancia_feriado if x>0]
     
     if  len(list_feriados_futuro) == 0:
-        print('DEBUG: feriados de year+1')
+        print('DEBUG: tahun+1 hari libur')
         return get_list_feriado_futuro(year = year+1)
            
     next_holiday_in_days = min(list_feriados_futuro)
@@ -234,15 +234,15 @@ def get_content_feriado(year = None, now = now):
     
     dt_month = dict(
             zip(range(1, 13), [
-                'janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho',
-                'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
+            'Agustus', 'September', 'Oktober', 'November', 'Desember'
             ]))
 
     str_dt_feriado = feriado.strftime(f'%d de {dt_month[feriado.month]} de %Y')
-    str_content_feriado = f"\nFaltam {next_holiday_in_days} dias para o próximo feriado: O {content}, em {str_dt_feriado}!"
-    extra_feriado = "\nE se prepara pro feriadão que o {} cai numa {}!🌞😎".format(content, wd)
+    str_content_feriado = f"\nMasih ada  {next_holiday_in_days} hari hingga hari libur berikutnya: O {content}, di {str_dt_feriado}!"
+    extra_feriado = "\nDan bersiaplah untuk akhir pekan ketika {} jatuh ke dalam {}!🌞😎".format(content, wd)
 
-    if wd in ["Segunda-feira","Sexta-feira"]:
+    if wd in ["Senin","Jumat"]:
         str_content_feriado = str_content_feriado+extra_feriado
     
     #print(str_content_feriado)
@@ -263,12 +263,12 @@ def format_post():
 
     
     # - Substitui texto específico
-    txt = txt.replace('Dia do Deficiente Físico','Dia da Pessoa com Deficência Física')
+    txt = txt.replace('Hari Penyandang Cacat Fisik','Hari Penyandang Cacat Fisik')
 
     if txt == '':
-        return '\nHoje não temos datas comemorativas! 😥 ' + str_feriados
+        return '\nHari ini kami tidak memiliki tanggal peringatan! 😥 ' + str_feriados
     else:
-        return '\n\nHoje é {}.'.format(txt) + str_feriados
+        return '\n\nHari ini adalah {}.'.format(txt) + str_feriados
 
 
 #- post_date()
